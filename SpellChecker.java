@@ -15,17 +15,19 @@ public class SpellChecker {
 	}
 
 	public static int levenshtein(String word1, String word2) {
-		if(word1.length() == 0){
-			return word2.length();
+		String w1 = word1.toLowerCase();
+		String w2 = word2.toLowerCase();
+		if(w1.length() == 0){
+			return w2.length();
 		}
-		if(word2.length() == 0){
-			return word1.length();
+		if(w2.length() == 0){
+			return w1.length();
 		}
-		if(word1.charAt(0) == word2.charAt(0)){
-			return levenshtein(tail(word1),tail(word2));
+		if(w1.charAt(0) == w2.charAt(0)){
+			return levenshtein(tail(w1),tail(w2));
 		}
-		int min = (int)(Math.min(levenshtein(tail(word1), word2),  levenshtein(word1, tail(word2))));
-		return 1 + (int)(Math.min(min, levenshtein(tail(word1), tail(word2))));
+		int min = (int)(Math.min(levenshtein(tail(w1), w2),  levenshtein(w1, tail(w2))));
+		return 1 + (int)(Math.min(min, levenshtein(tail(w1), tail(w2))));
 	}
 
 	public static String[] readDictionary(String fileName) {
